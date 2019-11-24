@@ -4,6 +4,7 @@ Created on Fri Nov 22 14:55:25 2019
 
 @author: Carlos Moreno Morera
 """
+from __future__ import print_function
 
 class Player:
     """
