@@ -11,7 +11,7 @@ from player import Player
 
 State = Enum('State', 'Creation Ask Vote Guess Final')
 
-class Partida:
+class Game:
     
     def __init__(self):
         """
@@ -19,7 +19,7 @@ class Partida:
         
         Returns
         -------
-        Constructed Player class.
+        Constructed Game class.
         
         """
         self.__num_turn = 0
@@ -35,3 +35,13 @@ class Partida:
     def remove_player(self, id):
         if (id in self.__players):
             del self.__players[id]
+            
+    def get_num_players(self):
+        """
+        Gets the number of players in the game.
+        
+        Returns
+        -------
+        int: number of players in the game.
+        """
+        return len(self.__players)

@@ -45,7 +45,7 @@ class Player:
         
         Parameters
         ----------
-        writer: str
+        writer: int
             Unique Telegram identifier of the user who wrote the character 
             assigned to this player.
             
