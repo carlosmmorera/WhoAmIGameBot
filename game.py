@@ -63,7 +63,56 @@ class Game:
         """
         return len(self.__players)
     
+    def __set_char(self, writer, recipient, received):
+        """
+        Sets a character to the recipient player from the writer player.
+        
+        Parameters
+        ----------
+        writer: int
+            Index in turn list which indicates the identifier of the writer
+            player.
+        recipient: int
+            Index in turn list which indicates the identifier of the recipient
+            player.
+        received: list
+            List of booleans which indicates which player in turn list has
+            already received a character.
+            
+        Returns
+        -------
+        None.
+        """
+        self.__players[self.__turn[recipient]].set_a_character(self.__turn[writer])
+        received[recipient] = True
+        
+    def __first_false(self, l):
+        """
+        Finds the first element false in a list.
+        
+        Parameters
+        ----------
+        l: list
+            List of booleans.
+            
+        Returns
+        -------
+        int: the index of the first false element.
+        """
+        i = 0
+        while (i < len(l) and l[i]):
+            i += 1
+        return i
+    
     def distribute_characters(self):
+        """
+        Distributes the characters between the players in the game. Each
+        player must receive an only character from another different player.
+        
+        Returns
+        -------
+        None.
+        """
         received = [False for i in range(self.get_num_players())]
         num_given = 0
         
@@ -79,10 +128,26 @@ class Game:
                 
                 if not(received[j]) and j != i:
                     shift -= 1
-                    
-            self.__players[self.__turn[j]].set_a_character(self.__turn[i])
-            num_given += 1
-            received[j] = True
             
-        #No terminada, falta repartir a los últimos dos jugadores
+            self.__set_char(i, j, received)
+            num_given += 1
+        
+        sec_last = self.get_num_players() - 2
+        last = self.get_num_players() - 1
+        
+        if not(received[sec_last]):
+            if received[last]:
+                self.__set_char(last, sec_last, received)
+                self.__set_char(sec_last, self.__first_false(received), received)
+            else:
+                self.__set_char(last, sec_last, received)
+                self.__set_char(sec_last, last, received)
+        elif not(received[last]):
+            self.__set_char(sec_last, last, received)
+            self.__set_char(last, self.__first_false(received), received)
+        else:
+            l = [sec_last, last]
+            random.shuffle(l)
+            self.__set_char(l[0], self.__first_false(received), received)
+            self.__set_char(l[1], self.__first_false(received), received)
             
