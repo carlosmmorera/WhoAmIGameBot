@@ -10,7 +10,5 @@ State = Enum('State', 'Creation Distribution TurnDetermination Ask Vote Guess Fi
 
 # Minimum number of players needed to start a game.
 MIN_NUM_PLAYERS = 2
-# Initialization of a new votation
-INIT_VOTES = {'Yes': 0, 'No': 0}
 # Duration (in seconds) of a votation
 VOTATION_TIME = 60

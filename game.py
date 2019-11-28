@@ -51,7 +51,7 @@ class Game:
         self.__players = {}
         self.__init_time = None
         self.__question = ""
-        self.__votes = cfg.INIT_VOTES
+        self.__votes = {'Yes': 0, 'No': 0}
     
     def add_player(self, id):
         """
@@ -188,7 +188,8 @@ class Game:
         None.
         """
         if self.__state == cfg.State.Vote:
-            self.__votes = cfg.INIT_VOTES
+            self.__votes['Yes'] = 0
+            self.__votes['No'] = 0
             self.__question = q
             self.__init_time = time.time()
     
