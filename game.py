@@ -65,6 +65,8 @@ class Game:
         if (self.__state == cfg.State.Creation and not(id in self.__players)):
             self.__players[id] = Player()
             self.__turn.append(id)
+            if len(self.__turn) == 1:
+                self.__first_player = id
             
     def remove_player(self, id):
         """
@@ -252,5 +254,19 @@ class Game:
         -------
         None.
         """
-        self.__players[player_id].save_new_character(character, clarif)
-        
+        if self.__state == cfg.State.Creation:
+            self.__players[player_id].save_new_character(character, clarif)
+    
+#    def set_state(self, stat):
+#        self.__state = stat
+#        
+#    def get_chars(self):
+#        print(self.__players)
+#        print(self.__turn)
+#        for p in self.__turn:
+#            print(p)
+#            print(self.__players[p].get_character())
+#            if self.__players[p].has_clarification():
+#                print(self.__players[p].get_clarification())
+#            print(self.__players[p].who_gave_me())
+#            print('-----------')
