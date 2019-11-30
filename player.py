@@ -107,13 +107,23 @@ class Player:
         """
         return self.__clarif is not None
     
+    def has_character(self):
+        """
+        Checks if the player has written its character.
+        
+        Returns
+        -------
+        bool: True if there is a character and False in other case.
+        """
+        return self.__char is not None
+    
     def get_character(self):
         """
         Gets the character written by the player.
         
         Returns
         -------
-        str: chartacer.
+        str: character.
         """
         return self.__char
     

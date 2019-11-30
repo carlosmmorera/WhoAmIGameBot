@@ -28,7 +28,7 @@ class Game:
     __players: dict
         Dictionary of players in this game.
     __init_time: float
-        Initial time of the last votation.
+        Initial time of the last state.
     __question: str
         Question of the last votation.
     __votes: dict
@@ -49,9 +49,9 @@ class Game:
         self.__first_player = None
         self.__state = cfg.State.Creation
         self.__players = {}
-        self.__init_time = None
         self.__question = ""
         self.__votes = {'Yes': 0, 'No': 0}
+        self.__init_time = time.time()
     
     def add_player(self, id):
         """
