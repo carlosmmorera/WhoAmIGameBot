@@ -234,3 +234,23 @@ class Game:
         t = time.time() - self.__init_time
         numvotes = self.__votes['Yes'] + self.__votes['No']
         return self.get_num_players() == numvotes or t >= cfg.VOTATION_TIME
+    
+    def set_character(self, player_id, character, clarif = None):
+        """
+        Sets the character given for the player who's written it.
+        
+        Parameters
+        ----------
+        player_id: int
+            Telegram identifier for the player.
+        character: str
+            Character written by the player.
+        clarif: str (optional)
+            Clarification of the character written by the player.        
+        
+        Returns
+        -------
+        None.
+        """
+        self.__players[player_id].save_new_character(character, clarif)
+        
